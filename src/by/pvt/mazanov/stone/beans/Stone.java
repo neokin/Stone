@@ -2,6 +2,10 @@ package by.pvt.mazanov.stone.beans;
 
 import by.pvt.mazanov.stone.enums.StoneType;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Stone{
     private double weight;
     private double cost;
@@ -55,5 +59,10 @@ public class Stone{
 
     public void printStone(){
         System.out.println("Weight "+this.weight+" "+ "Cost "+this.cost+" "+ "Name "+this.name+" "+ "Type "+this.type);
+    }
+
+    public void writeStone(PrintWriter writer) throws IOException {
+        writer.println(this.type+" "+this.name+" "+this.cost +" "+this.weight);
+
     }
 }
