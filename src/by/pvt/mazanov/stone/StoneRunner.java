@@ -39,33 +39,6 @@ public class StoneRunner {
         consoleFind.startcon(necklace1, fWriter, "cost");
         consoleFind.startcon(necklace1, fWriter, "weight");
 
-
-
-        //scanner.close();
-
-
-
-
-
-
-
-/*
-        for(Stone s : necklace1.sort(new StoneNameComparator())){
-            //s.printStone();
-            s.writeStone(fWriter);
-        }*/
-
-/*        System.out.println();
-
-        Expression expPrice = (Stone stone) -> {
-            return stone.getCost() > 0 && stone.getCost() < 11;
-        };
-
-        for (Stone s : necklace1.find(expPrice)) {
-            //s.printStone();
-            s.writeStone(fWriter);
-        }*/
-
         fWriter.println("Total Cost " + necklace1.getCost());
         fWriter.println("Total Weight " + necklace1.getWeight());
         fWriter.close();
