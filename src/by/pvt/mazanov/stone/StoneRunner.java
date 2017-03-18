@@ -1,40 +1,55 @@
 package by.pvt.mazanov.stone;
 
-import by.pvt.mazanov.stone.beans.*;
+import by.pvt.mazanov.stone.beans.Necklace;
+import by.pvt.mazanov.stone.beans.Stone;
+import by.pvt.mazanov.stone.beans.StoneSelector;
+import by.pvt.mazanov.stone.comparators.StoneNameComparator;
+import by.pvt.mazanov.stone.enums.StoneType;
 import by.pvt.mazanov.stone.interfaces.Expression;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StoneRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Stone almaz = new PrecisiousStone("алмаз", 13, 7);
-        Stone rubin = new PrecisiousStone("рубин",  10, 10);
-        Stone sapfir = new PrecisiousStone("сапфир",  4, 5);
-        Stone izumrud = new PrecisiousStone("изумруд",  10, 10);
+        BufferedReader bReader = new BufferedReader(new FileReader("src/by/pvt/mazanov/stone/files/InputData"));
 
-        Stone ametit = new SemiprecisiousStone("аметит", 10, 10);
-        Stone giacint = new SemiprecisiousStone("гиацинт",  10, 10);
-        Stone granat = new SemiprecisiousStone("гранат",  10, 10);
+        String lineContents;
+        String[] tok;
+        StoneSelector stoneSelector = new StoneSelector();
         Necklace necklace1 = new Necklace(new ArrayList<>());
-        necklace1.addStone(almaz);
-        necklace1.addStone(rubin);
-        necklace1.addStone(sapfir);
 
-        //Expression expWeight = (Stone stone) -> { return stone.getWeight() > 0 && stone.getWeight() < 11; };
-        Expression expPrice = (Stone stone) -> { return stone.getCost() > 0 && stone.getCost() < 11; };
-        for(Stone s : necklace1.find(expPrice)){
+        while ((lineContents = bReader.readLine())
+                != null) {
+            tok = lineContents.split(" +");
+
+
+            Stone stone = stoneSelector.getStone(StoneType.valueOf(tok[0]), tok[1], Double.parseDouble(tok[2]), Double.parseDouble(tok[3]));
+            necklace1.addStone(stone);
+
+
+        }
+        bReader.close();
+
+
+        Expression expPrice = (Stone stone) -> {
+            return stone.getCost() > 0 && stone.getCost() < 11;
+        };
+        for (Stone s : necklace1.find(expPrice)) {
             s.printStone();
         }
 
-/*
+
         for(Stone s : necklace1.sort(new StoneNameComparator())){
             s.printStone();
-        }*/
+        }
 
 
-        System.out.println("Cost "+necklace1.getCost());
-        System.out.println("Weight " +necklace1.getWeight());
+        System.out.println("Cost " + necklace1.getCost());
+        System.out.println("Weight " + necklace1.getWeight());
     }
 }

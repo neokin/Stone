@@ -1,4 +1,6 @@
-package by.pvt.mazanov.stone.beans;
+package by.pvt.mazanov.stone.comparators;
+
+import by.pvt.mazanov.stone.beans.Stone;
 
 import java.util.Comparator;
 
