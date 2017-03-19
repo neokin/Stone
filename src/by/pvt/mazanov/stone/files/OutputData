@@ -1,7 +1,45 @@
+Stones sorted by name
+Type    name   cost   weight
+SEMIPRECISIOUS ametit 10.0 10.0
+SEMIPRECISIOUS giacint 10.0 10.0
+SEMIPRECISIOUS granat 10.0 10.0
+PRECISIOUS izumrud 10.0 10.0
+PRECISIOUS rubin 10.0 10.0
+PRECISIOUS saphir 4.0 5.0
+
+Stones sorted by cost
+Type    name   cost   weight
+PRECISIOUS saphir 4.0 5.0
+PRECISIOUS rubin 10.0 10.0
+PRECISIOUS izumrud 10.0 10.0
+SEMIPRECISIOUS ametit 10.0 10.0
+SEMIPRECISIOUS giacint 10.0 10.0
+SEMIPRECISIOUS granat 10.0 10.0
+
+Stones sorted by weight
+Type    name   cost   weight
+PRECISIOUS saphir 4.0 5.0
+PRECISIOUS rubin 10.0 10.0
+PRECISIOUS izumrud 10.0 10.0
+SEMIPRECISIOUS ametit 10.0 10.0
+SEMIPRECISIOUS giacint 10.0 10.0
+SEMIPRECISIOUS granat 10.0 10.0
+
 Stones found by name
 Type    name   cost   weight
-PRECISIOUS almaz 13.0 7.0
-SEMIPRECISIOUS ametit 10.0 10.0
+SEMIPRECISIOUS giacint 10.0 10.0
+SEMIPRECISIOUS granat 10.0 10.0
 
-Total Cost 67.0
-Total Weight 62.0
+Stones found by cost
+Type    name   cost   weight
+costmin = 3
+costmax = 10
+PRECISIOUS saphir 4.0 5.0
+
+Stones found by weight
+Type    name   cost   weight
+weightmin = 4
+weightmax = 6
+
+Total Cost 54.0
+Total Weight 55.0

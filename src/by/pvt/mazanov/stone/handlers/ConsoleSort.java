@@ -13,6 +13,7 @@ import java.io.PrintWriter;
  */
 public class ConsoleSort extends Console {
 
+    @Override
     public void startcon(Necklace nc, PrintWriter fw, String type) throws IOException {
 
         while (true) {

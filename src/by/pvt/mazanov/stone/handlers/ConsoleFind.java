@@ -16,6 +16,10 @@ import java.io.PrintWriter;
 public class ConsoleFind extends Console{
     Expression exp;
     String name;
+
+
+
+    @Override
     public void startcon(Necklace nc, PrintWriter fw, String type) throws IOException {
 
         while (true) {
@@ -38,6 +42,7 @@ public class ConsoleFind extends Console{
 
                     case "cost":
                         getMinMax("cost");
+                        fw.println(type+"min = " + min +"\n"+type+"max = " + max);
                         exp = (Stone stone) -> {
                             return stone.getCost() > Integer.parseInt(min) && stone.getCost() < Integer.parseInt(max);
                         };
@@ -46,6 +51,7 @@ public class ConsoleFind extends Console{
 
                     case "weight":
                         getMinMax("weight");
+                        fw.println(type+"min = " + min +"\n"+type+"max = " + max);
                         exp = (Stone stone) -> {
                             return stone.getCost() > Integer.parseInt(min) && stone.getCost() < Integer.parseInt(max);
                         };

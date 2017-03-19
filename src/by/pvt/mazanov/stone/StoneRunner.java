@@ -3,7 +3,7 @@ package by.pvt.mazanov.stone;
 import by.pvt.mazanov.stone.beans.*;
 import by.pvt.mazanov.stone.enums.StoneType;
 import by.pvt.mazanov.stone.handlers.*;
-import by.pvt.mazanov.stone.interfaces.Expression;
+
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,9 +12,15 @@ public class StoneRunner {
 
     public static void main(String[] args) throws IOException {
         Necklace necklace1 = new Necklace(new ArrayList<>());
-        BufferedReader bReader = new BufferedReader(new FileReader("src/by/pvt/mazanov/stone/files/InputData"));
-        PrintWriter fWriter = new PrintWriter(new FileWriter("src/by/pvt/mazanov/stone/files/OutputData"));
-
+        BufferedReader bReader = null;
+        PrintWriter fWriter = null;
+        try {
+             bReader = new BufferedReader(new FileReader("src/by/pvt/mazanov/stone/files/InputData"));
+             fWriter = new PrintWriter(new FileWriter("src/by/pvt/mazanov/stone/files/OutputData"));
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
         String lineContents;
         String[] tok;
         StoneSelector stoneSelector = new StoneSelector();
@@ -23,11 +29,15 @@ public class StoneRunner {
 
 
         bReader.readLine();
-        while ((lineContents = bReader.readLine())
-                != null) {
+        while ((lineContents = bReader.readLine()) != null) {
             tok = lineContents.split(" +");
-            Stone stone = stoneSelector.getStone(StoneType.valueOf(tok[0]), tok[1], Double.parseDouble(tok[2]), Double.parseDouble(tok[3]));
-            necklace1.addStone(stone);
+            try {
+                Stone stone = stoneSelector.getStone(StoneType.valueOf(tok[0]), tok[1], Double.parseDouble(tok[2]), Double.parseDouble(tok[3]));
+                necklace1.addStone(stone);
+            }
+            catch(NumberFormatException ex) {
+                System.out.println("Error: " + ex.getMessage());
+            }
         }
         bReader.close();
 
@@ -43,7 +53,5 @@ public class StoneRunner {
         fWriter.println("Total Weight " + necklace1.getWeight());
         fWriter.close();
     }
-
-
 
 }
