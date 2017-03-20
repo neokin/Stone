@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class ConsoleSort extends Console {
 
     @Override
-    public void startcon(Necklace nc, PrintWriter fw, String type) throws IOException {
+    public void startCon(Necklace nc, PrintWriter fw, String type) throws IOException {
 
         while (true) {
             System.out.println("Would you like to sort the stones by " + type + "?(y/n)");

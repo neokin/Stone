@@ -8,21 +8,27 @@ import by.pvt.mazanov.stone.handlers.*;
 import java.io.*;
 import java.util.ArrayList;
 
+
 public class StoneRunner {
+
+    public static final String INPUT_FILE = "src/by/pvt/mazanov/stone/InputData";
+    public static final String OUTPUT_FILE = "src/by/pvt/mazanov/stone/OutputData";
 
     public static void main(String[] args) throws IOException {
         Necklace necklace1 = new Necklace(new ArrayList<>());
         BufferedReader bReader = null;
         PrintWriter fWriter = null;
         try {
-             bReader = new BufferedReader(new FileReader("src/by/pvt/mazanov/stone/files/InputData"));
-             fWriter = new PrintWriter(new FileWriter("src/by/pvt/mazanov/stone/files/OutputData"));
+             bReader = new BufferedReader(new FileReader(INPUT_FILE));
+             fWriter = new PrintWriter(new FileWriter(OUTPUT_FILE));
         }
         catch (FileNotFoundException ex){
             System.out.println("Error: " + ex.getMessage());
+            System.exit(1);
         }
+
         String lineContents;
-        String[] tok;
+        String[] words;
         StoneSelector stoneSelector = new StoneSelector();
         ConsoleSort consoleSort = new ConsoleSort();
         ConsoleFind consoleFind = new ConsoleFind();
@@ -30,9 +36,9 @@ public class StoneRunner {
 
         bReader.readLine();
         while ((lineContents = bReader.readLine()) != null) {
-            tok = lineContents.split(" +");
+            words = lineContents.split(" +");
             try {
-                Stone stone = stoneSelector.getStone(StoneType.valueOf(tok[0]), tok[1], Double.parseDouble(tok[2]), Double.parseDouble(tok[3]));
+                Stone stone = stoneSelector.getStone(StoneType.valueOf(words[0]), words[1], Double.parseDouble(words[2]), Double.parseDouble(words[3]));
                 necklace1.addStone(stone);
             }
             catch(NumberFormatException ex) {
@@ -41,13 +47,13 @@ public class StoneRunner {
         }
         bReader.close();
 
-        consoleSort.startcon(necklace1, fWriter, "name");
-        consoleSort.startcon(necklace1, fWriter, "cost");
-        consoleSort.startcon(necklace1, fWriter, "weight");
+        consoleSort.startCon(necklace1, fWriter, "name");
+        consoleSort.startCon(necklace1, fWriter, "cost");
+        consoleSort.startCon(necklace1, fWriter, "weight");
 
-        consoleFind.startcon(necklace1, fWriter, "name");
-        consoleFind.startcon(necklace1, fWriter, "cost");
-        consoleFind.startcon(necklace1, fWriter, "weight");
+        consoleFind.startCon(necklace1, fWriter, "name");
+        consoleFind.startCon(necklace1, fWriter, "cost");
+        consoleFind.startCon(necklace1, fWriter, "weight");
 
         fWriter.println("Total Cost " + necklace1.getCost());
         fWriter.println("Total Weight " + necklace1.getWeight());

@@ -20,7 +20,7 @@ public class ConsoleFind extends Console{
 
 
     @Override
-    public void startcon(Necklace nc, PrintWriter fw, String type) throws IOException {
+    public void startCon(Necklace nc, PrintWriter fw, String type) throws IOException {
 
         while (true) {
             System.out.println("Would you like to find the stones by " + type + "?(y/n)");

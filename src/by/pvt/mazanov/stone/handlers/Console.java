@@ -16,8 +16,5 @@ public abstract class Console {
     public Console() {
     }
 
-/*    public Console() {
-    }*/
-
-    public abstract void startcon(Necklace nc, PrintWriter fw, String type) throws IOException;
+    public abstract void startCon(Necklace nc, PrintWriter fw, String type) throws IOException;
 }
