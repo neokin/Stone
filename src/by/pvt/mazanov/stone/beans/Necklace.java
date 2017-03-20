@@ -57,21 +57,21 @@ public class Necklace  implements TotalAmount, SortStone, FindStone {
 
     @Override
     public double getCost() {
-        double  totalcost = 0;
+        double  totalCost = 0;
         for(Stone stone: stonesList){
-            totalcost += stone.getCost();
+            totalCost += stone.getCost();
         }
-        return totalcost;
+        return totalCost;
 
     }
 
 
     @Override
     public double getWeight() {
-        double  totalweight = 0;
+        double  totalWeight = 0;
         for(Stone stone: stonesList){
-            totalweight += stone.getWeight();
+            totalWeight += stone.getWeight();
         }
-        return totalweight;
+        return totalWeight;
     }
 }
