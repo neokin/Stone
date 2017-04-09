@@ -15,14 +15,7 @@
         <th>Cost</th>
     </tr>
     </thead>
-    <tfoot>
-    <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Weight</th>
-        <th>Cost</th>
-    </tr>
-    </tfoot>
+
     <tbody>
     <c:forEach items="${necklace}" var="stone">
         <tr>
@@ -34,7 +27,19 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="test" target="_blank">Test Button</a>
+<div>
+    <input type="radio" name="find" value="cost" checked="checked"> Cost<br>
+    <input type="radio" name="find" value="weight"> Weight
+</div>
+<div>
+    <label>Мин:
+        <input id='min' placeholder="Введите мин значение">
+    </label>
+    <label>Макс:
+        <input id='max' placeholder="Введите макс значение">
+    </label>
+</div>
+<button id="search">Search at diapason</button>
 <script src="<c:url value="/resources/js/lib/jquery-1.12.4.js"/>"></script>
 <script src="<c:url value="/resources/js/lib/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/resources/js/necklace.js"/>"></script>
