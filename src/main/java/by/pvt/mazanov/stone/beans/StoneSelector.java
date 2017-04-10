@@ -8,14 +8,14 @@ import by.pvt.mazanov.stone.enums.StoneType;
 
 //Factory method
 public class StoneSelector {
-    public Stone getStone(StoneType type, String name, double cost, double weight){
+    public Stone getStone(StoneType type, String name, double weight, double cost){
         Stone stone = null;
         switch (type){
             case PRECISIOUS:
-                stone = new PrecisiousStone(name, cost, weight);
+                stone = new PrecisiousStone(name, weight, cost);
                 break;
             case SEMIPRECISIOUS:
-                stone = new SemiprecisiousStone(name, cost, weight);
+                stone = new SemiprecisiousStone(name, weight, cost);
                 break;
         }
         return stone;

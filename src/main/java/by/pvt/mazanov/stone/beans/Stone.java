@@ -13,10 +13,10 @@ public class Stone{
 
 
     public Stone(Stone stone) {
-        this(stone.getName(), stone.getType(), stone.getCost(), stone.getWeight());
+        this(stone.getName(), stone.getType(), stone.getWeight(), stone.getCost());
     }
 
-    public Stone(String name, StoneType type, double cost, double weight) {
+    public Stone(String name, StoneType type, double weight, double cost) {
         this.name = name;
         this.type = type;
         this.cost = cost;

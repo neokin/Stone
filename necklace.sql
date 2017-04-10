@@ -12,12 +12,12 @@ CREATE TABLE `stones` (
 
 INSERT INTO `necklace`.`stones`
 (`id`,`name`,`type`,`weight`,`cost`)
-VALUES (1,'almaz','PRECISIOUS',13,7);
+VALUES (1,'almaz','PRECISIOUS',55,7);
 
 INSERT INTO `necklace`.`stones`
 (`id`,`name`,`type`,`weight`,`cost`)
-VALUES (2,'rubin','PRECISIOUS',10,10);
+VALUES (2,'rubin','PRECISIOUS',66,10);
 
 INSERT INTO `necklace`.`stones`
 (`id`,`name`,`type`,`weight`,`cost`)
-VALUES (3,'ametit','SEMIPRECISIOUS',5,5);
+VALUES (3,'ametit','SEMIPRECISIOUS',77,5);

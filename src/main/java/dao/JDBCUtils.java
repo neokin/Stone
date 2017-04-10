@@ -73,13 +73,6 @@ public class JDBCUtils {
                 StoneSelector stoneSelector = new StoneSelector();
 
                 Stone stone = stoneSelector.getStone(StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
-                //Stone employee = new Stone();
-      /*          employee.setName(name);
-                employee.setPosition(position);
-                employee.setOffice(office);
-                employee.setAge(age);
-                employee.setStartDate(startDate);
-                employee.setSalary(salary);*/
 
                 list.add(stone);
             }
@@ -101,7 +94,7 @@ public class JDBCUtils {
             pstm = conn.prepareStatement(sql);
             //pstm.setString(1, stone.getName());
             pstm.setString(2, String.valueOf(stone.getType()));
-            pstm.setString(2, "text");
+            //pstm.setString(2, "text");
             pstm.setDouble(3, stone.getWeight());
             pstm.setDouble(4, stone.getCost());
 /*            pstm.setString(2, employee.getPosition());
@@ -116,5 +109,38 @@ public class JDBCUtils {
         }
 
 
+    }
+
+    public static Collection<Stone> findStones(Connection conn, String column, int min, int max){
+        List<Stone> list = new ArrayList<>();
+        String sql = "select * from stones where "+column+" >= " + min +" and "+ column + "<= " + max;
+
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                String name = rs.getString("name");
+                String type = rs.getString("type");
+                String weight = rs.getString("weight");
+                String cost = rs.getString("cost");
+
+
+                StoneSelector stoneSelector = new StoneSelector();
+
+                Stone stone = stoneSelector.getStone(StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
+
+                list.add(stone);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
     }
 }

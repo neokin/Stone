@@ -18,10 +18,7 @@ public class NecklaceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-
         Connection conn = JDBCUtils.getConnectionPool().checkOut();
-
 
         request.setAttribute("necklace", JDBCUtils.getStones(conn));
         request.getRequestDispatcher("/necklace.jsp").forward(request, response);
@@ -29,6 +26,17 @@ public class NecklaceServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doPost(request, response);
+
+        String range = request.getParameter("range");
+        String min = request.getParameter("min");
+        String max = request.getParameter("max");
+
+
+        Connection conn = JDBCUtils.getConnectionPool().checkOut();
+
+        request.setAttribute("necklace", JDBCUtils.findStones(conn, range, Integer.parseInt(min), Integer.parseInt(max)));
+        request.getRequestDispatcher("/necklace.jsp").forward(request, response);
+
+       // super.doPost(request, response);
     }
 }

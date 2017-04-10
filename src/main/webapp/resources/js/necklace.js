@@ -21,9 +21,10 @@ $(document).ready(function() {
                    // $('html').html(response)
                     //alert(response)
 
-                    //$('#necklace').clearAttributes()
-                    $('html').html(response)
-                    $("#necklace").DataTable();
+                    //$('').clearAttributes()
+                    //$('html').html(response)
+                    $("html").html(response)
+                    $("#necklace").DataTable()
 
                 },
                 error:function(){
