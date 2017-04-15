@@ -1,6 +1,7 @@
 package by.pvt.mazanov.stone.servlets;
 
 
+import dao.JDBCConnectionPool;
 import dao.JDBCUtils;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ public class NecklaceServlet extends HttpServlet {
 
         request.setAttribute("necklace", JDBCUtils.getStones(conn));
         request.getRequestDispatcher("/necklace.jsp").forward(request, response);
+        JDBCUtils.getConnectionPool().expire(conn);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +38,7 @@ public class NecklaceServlet extends HttpServlet {
 
         request.setAttribute("necklace", JDBCUtils.findStones(conn, range, Integer.parseInt(min), Integer.parseInt(max)));
         request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-
-       // super.doPost(request, response);
+        JDBCUtils.getConnectionPool().expire(conn);
+      
     }
 }

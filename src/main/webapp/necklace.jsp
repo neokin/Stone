@@ -39,9 +39,36 @@
         <input id='max' placeholder="Введите макс значение">
     </label>
 </div>
-<button id="search">Search at diapason</button>
+
+<style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+    /*    background-color: #e5eecc;*/
+      /*  border: solid 1px #c3c3c3;*/
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+</style>
+
+<button id="search">Search at diapason</button><br>
+
+
+
+<div style="text-align: center;"><b>Отобранные камни для ожерелья</b><br><br> <button id="flip">Развернуть</button></div>
+<div id="panel">Hello world!</div>
+
+
+<script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
+
+
 <script src="<c:url value="/resources/js/lib/jquery-1.12.4.js"/>"></script>
 <script src="<c:url value="/resources/js/lib/jquery.dataTables.min.js"/>"></script>
+
 <script src="<c:url value="/resources/js/necklace.js"/>"></script>
+
 </body>
 </html>
