@@ -15,7 +15,7 @@ $(document).ready(function() {
                 success: function(response){
 
 
-                    $("html").html(response)
+                    $("html").html(response);
                     $("#necklace").DataTable()
 
 
@@ -60,8 +60,11 @@ $(document).ready(function() {
         var cost = $('td:nth-child(4)', raw).text();
         var weight = $('td:nth-child(5)', raw).text();
         //var btn = "<button class='necklace-delete' data-stone-id=\'" + ${stone.id} + "\'>Delete from necklace</button>";
-        var btn = "<button class='necklace-delete' data-stone-id='${stone.id}'>Delete from necklace</button>";
-
+        //var btn = "<button class='necklace-delete' data-stone-id='${stone.id}'>Delete from necklace</button>";
+        var btn = "<button class='necklace-delete' data-stone-id="+stoneId+">Delete from necklace</button>";
+/*        var btn =" <button class='necklace-delete' data-stone-id= ";
+        btn+=$(stone.id);
+        btn += ">Delete from necklace</button>";*/
         $.ajax(location.href, {
             type: "post",
             url: "http://localhost:8080/necklace",
