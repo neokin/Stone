@@ -15,12 +15,22 @@ import java.util.List;
  */
 public class Necklace  implements TotalAmount, SortStone, FindStone {
     List<Stone> stonesList;
+    int id;
+    String name;
 
+    public Necklace(int id, String name) {
+        this.id = id; this.name = name;
+    }
 
     public Necklace(List<Stone> stonesList) {
         this.stonesList = stonesList;
     }
 
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
     public List<Stone> getStonesList() {
         return stonesList;

@@ -7,7 +7,7 @@ import by.pvt.mazanov.stone.enums.StoneType;
  */
 public class PrecisiousStone extends Stone {
 
-    public PrecisiousStone(String name, double weight, double cost) {
-        super(name,  StoneType.PRECISIOUS, weight, cost);
+    public PrecisiousStone(int id, String name, double weight, double cost) {
+        super(id, name,  StoneType.PRECISIOUS, weight, cost);
     }
 }

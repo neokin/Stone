@@ -42,7 +42,7 @@ public class StoneRunner {
         while ((lineContents = bReader.readLine()) != null) {
             words = lineContents.split(" +");
             try {
-                Stone stone = stoneSelector.getStone(StoneType.valueOf(words[0]), words[1], Double.parseDouble(words[2]), Double.parseDouble(words[3]));
+                Stone stone = stoneSelector.getStone(0, StoneType.valueOf(words[0]), words[1], Double.parseDouble(words[2]), Double.parseDouble(words[3]));
                 necklace1.addStone(stone);
             }
             catch(NumberFormatException ex) {

@@ -1,5 +1,6 @@
 package dao;
 
+import by.pvt.mazanov.stone.beans.Necklace;
 import by.pvt.mazanov.stone.beans.Stone;
 import by.pvt.mazanov.stone.beans.StoneSelector;
 import by.pvt.mazanov.stone.enums.StoneType;
@@ -63,7 +64,7 @@ public class JDBCUtils {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-
+                String id = rs.getString("id");
                 String name = rs.getString("name");
                 String type = rs.getString("type");
                 String weight = rs.getString("weight");
@@ -72,7 +73,7 @@ public class JDBCUtils {
 
                 StoneSelector stoneSelector = new StoneSelector();
 
-                Stone stone = stoneSelector.getStone(StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
+                Stone stone = stoneSelector.getStone(Integer.parseInt(id), StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
 
                 list.add(stone);
             }
@@ -94,14 +95,8 @@ public class JDBCUtils {
             pstm = conn.prepareStatement(sql);
             //pstm.setString(1, stone.getName());
             pstm.setString(2, String.valueOf(stone.getType()));
-            //pstm.setString(2, "text");
             pstm.setDouble(3, stone.getWeight());
             pstm.setDouble(4, stone.getCost());
-/*            pstm.setString(2, employee.getPosition());
-            pstm.setString(3, employee.getOffice());
-            pstm.setString(4, employee.getAge());
-            pstm.setString(5, employee.getStartDate());
-            pstm.setString(6, employee.getSalary());*/
 
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -121,7 +116,7 @@ public class JDBCUtils {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-
+                String id = rs.getString("id");
                 String name = rs.getString("name");
                 String type = rs.getString("type");
                 String weight = rs.getString("weight");
@@ -130,7 +125,7 @@ public class JDBCUtils {
 
                 StoneSelector stoneSelector = new StoneSelector();
 
-                Stone stone = stoneSelector.getStone(StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
+                Stone stone = stoneSelector.getStone(Integer.parseInt(id), StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
 
                 list.add(stone);
             }
@@ -142,5 +137,96 @@ public class JDBCUtils {
 
 
         return list;
+    }
+
+    public static Necklace getNecklace(Connection conn) {
+        List<Stone> list = new ArrayList<>();
+        String sql = "SELECT * FROM necklace";
+
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                return new Necklace(id, name);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static List<Stone> getNecklaceStones(Connection conn, int necklaceId) {
+        List<Stone> list = new ArrayList<>();
+        String sql = "SELECT stones.id, name, type, weight,cost FROM necklace_stones INNER JOIN stones ON necklace_stones.stone_id = stones.id WHERE necklace_stones.id = " + necklaceId;
+
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                String type = rs.getString("type");
+                String weight = rs.getString("weight");
+                String cost = rs.getString("cost");
+
+
+                StoneSelector stoneSelector = new StoneSelector();
+
+                Stone stone = stoneSelector.getStone(Integer.parseInt(id), StoneType.valueOf(type), name, Double.parseDouble(weight), Double.parseDouble(cost));
+
+                list.add(stone);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
+    }
+
+    public static Boolean insertNecklaceStone(Connection conn, int necklaceId, int stoneId) {
+        String sql = "insert into necklace_stones(id, stone_id) values (?,?)";
+
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, necklaceId);
+            pstm.setInt(2, stoneId);
+
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
+    public static Boolean deleteNecklaceStone(Connection conn, int necklaceId, int stoneId) {
+        String sql = "delete from necklace_stones where id = ? AND stone_id = ?";
+
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, necklaceId);
+            pstm.setInt(2, stoneId);
+
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

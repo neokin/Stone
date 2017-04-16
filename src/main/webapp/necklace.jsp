@@ -4,29 +4,48 @@
 <head>
     <title>Necklaces</title>
     <link href="<c:url value="/resources/css/jquery.dataTables.min.css"/>" rel="stylesheet">
+    <style>
+        #stones, #necklace {
+            padding: 5px;
+            text-align: center;
+
+        }
+
+        .hide {
+            display: none
+        }
+    </style>
 </head>
 <body>
-<table id="necklace" class="display" cellspacing="0" width="100%">
+<table id="stones" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th class="hide">Id</th>
         <th>Type</th>
         <th>Name</th>
         <th>Weight</th>
         <th>Cost</th>
+        <th>Add</th>
     </tr>
     </thead>
 
     <tbody>
-    <c:forEach items="${necklace}" var="stone">
-        <tr>
+    <c:forEach items="${stones}" var="stone">
+        <tr id="row-stone-id-${stone.id}">
+            <td class="hide">${stone.id}</td>
             <td>${stone.type}</td>
             <td>${stone.name}</td>
             <td>${stone.weight}</td>
             <td>${stone.cost}</td>
+            <td><button class="necklace-add" data-stone-id="${stone.id}">Add to necklace</button> </td>
+
         </tr>
+
     </c:forEach>
     </tbody>
 </table>
+
+<fieldset>
 <div>
     <input type="radio" name="find" value="cost" checked="checked"> Cost<br>
     <input type="radio" name="find" value="weight"> Weight
@@ -39,29 +58,44 @@
         <input id='max' placeholder="Введите макс значение">
     </label>
 </div>
-
-<style>
-    #panel, #flip {
-        padding: 5px;
-        text-align: center;
-    /*    background-color: #e5eecc;*/
-      /*  border: solid 1px #c3c3c3;*/
-    }
-
-    #panel {
-        padding: 50px;
-        display: none;
-    }
-</style>
-
 <button id="search">Search at diapason</button><br>
+</fieldset>
 
 
+<div style="text-align: center;"><b>Отобранные камни для ожерелья </b>${necklace.name}</div>
+<div class="hide" id="necklace-id">${necklace.id}</div>
+<table id="necklace" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Cost</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
 
-<div style="text-align: center;"><b>Отобранные камни для ожерелья</b><br><br> <button id="flip">Развернуть</button></div>
-<div id="panel">Hello world!</div>
-
-
+    <tbody>
+    <c:forEach items="${necklace.stonesList}" var="stone">
+        <tr>
+            <td>${stone.type}</td>
+            <td>${stone.name}</td>
+            <td>${stone.weight}</td>
+            <td>${stone.cost}</td>
+            <td><button class="necklace-delete" data-stone-id="${stone.id}">Delete from necklace</button> </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<bh />
+<div>
+    <div>
+        <label>Цена ожерелья: </label> ${necklace.getCost()}
+    </div>
+    <div>
+        <label>Вес ожерелья: </label> ${necklace.getWeight()}
+    </div>
+</div>
 <script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
 
 
