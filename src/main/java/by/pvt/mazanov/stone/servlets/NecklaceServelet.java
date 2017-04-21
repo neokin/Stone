@@ -46,31 +46,46 @@ public class NecklaceServelet extends HttpServlet {
                 Necklace necklace = JDBCUtils.getNecklace(conn);
                 necklace.setStonesList(JDBCUtils.getNecklaceStones(conn, necklace.getId()));
                 request.setAttribute("necklace", necklace);
-                request.getRequestDispatcher("/necklace.jsp").forward(request, response);
+                //request.getRequestDispatcher("/necklace.jsp").forward(request, response.getWriter().);
                 break;
             }
             case "add": {
                 String necklaceId = request.getParameter("necklace");
                 String stoneId = request.getParameter("stone");
-                Boolean result = JDBCUtils.insertNecklaceStone(conn, Integer.parseInt(necklaceId), Integer.parseInt(stoneId));
-                if (result) {
-                    response.getWriter().append("100");
-                } else {
+                Boolean result =JDBCUtils.insertNecklaceStone(conn, Integer.parseInt(necklaceId), Integer.parseInt(stoneId));
+                if(!result){
                     response.sendError(500);
                 }
-                response.getWriter().close();
                 break;
             }
             case "delete": {
                 String necklaceId = request.getParameter("necklace");
                 String stoneId = request.getParameter("stone");
-                Boolean result = JDBCUtils.deleteNecklaceStone(conn, Integer.parseInt(necklaceId), Integer.parseInt(stoneId));
-                if (result) {
-                    response.getWriter().append("100");
-                } else {
+                Boolean result =JDBCUtils.deleteNecklaceStone(conn, Integer.parseInt(necklaceId), Integer.parseInt(stoneId));
+                if(!result){
                     response.sendError(500);
                 }
+                break;
+            }
+            case "updateCost": {
+
+                Necklace necklace = JDBCUtils.getNecklace(conn);
+                necklace.setStonesList(JDBCUtils.getNecklaceStones(conn, necklace.getId()));
+                double cost = necklace.getCost();
+                response.getWriter().write(String.valueOf(cost));
                 response.getWriter().close();
+                request.getRequestDispatcher("/necklace.jsp").forward(request, response);
+                break;
+            }
+
+            case "updateWeight": {
+
+                Necklace necklace = JDBCUtils.getNecklace(conn);
+                necklace.setStonesList(JDBCUtils.getNecklaceStones(conn, necklace.getId()));
+                double weight = necklace.getWeight();
+                response.getWriter().write(String.valueOf(weight));
+                response.getWriter().close();
+                request.getRequestDispatcher("/necklace.jsp").forward(request, response);
                 break;
             }
         }

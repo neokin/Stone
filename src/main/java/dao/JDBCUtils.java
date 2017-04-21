@@ -229,4 +229,24 @@ public class JDBCUtils {
         }
         return true;
     }
+
+    public static Boolean updateTotal(Connection conn, int costId, int weightId) {
+        //String sql = "delete from necklace_stones where id = ? AND stone_id = ?";
+
+        PreparedStatement pstm = null;
+        try {
+            //pstm = conn.prepareStatement(sql);
+            //pstm.setDouble(getNecklace(conn).getCost(), costId);
+            ;
+            pstm.setInt((int)getNecklace(conn).getCost(), costId);
+            pstm.setInt((int)getNecklace(conn).getCost(), costId);
+            //pstm.setInt(2, weightId);
+
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

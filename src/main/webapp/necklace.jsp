@@ -90,10 +90,11 @@
 <bh />
 <div>
     <div>
-        <label>Цена ожерелья: </label> ${necklace.getCost()}
+      <%--  <label id = "cost">Цена ожерелья: </label> ${necklace.getCost()}--%>
+          <label id = "cost">Цена ожерелья: ${necklace.getCost()} </label>
     </div>
     <div>
-        <label>Вес ожерелья: </label> ${necklace.getWeight()}
+        <label id = "weight">Вес ожерелья: ${necklace.getWeight()} </label>
     </div>
 </div>
 <script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
