@@ -1,48 +1,48 @@
-
-$(document).ready(function() {
+$(document).ready(function () {
     var table0 = $("#stones").DataTable();
     var table = $("#necklace").DataTable();
 
-    $("#search").click(function() {
+    $("#search").click(function () {
 
         var rangeValue = $('input[name="find"]:checked').val();
         var minValue = $("#min").val();
         var maxValue = $("#max").val();
-        $.ajax(location.href, {type: "post",
-                url: "http://localhost:8080/necklace",
-                data: {method: "search", range: rangeValue, min: minValue, max: maxValue},
-                cache: false,
-                success: function(response){
+        $.ajax(location.href, {
+            type: "post",
+            url: "http://localhost:8080/necklace",
+            data: {method: "search", range: rangeValue, min: minValue, max: maxValue},
+            cache: false,
+            success: function (response) {
+//response.children('td')
 
+                $("html").html(response);
+                $("#necklace").DataTable()
+                updateCW()
 
-                    $("html").html(response);
-                    $("#necklace").DataTable()
-                    updateCW()
-
-                },
-                error:function(){
-                    alert('\t\tError\nYou need fill in min and max')
-                }
+            },
+            error: function () {
+                alert('\t\tError\nYou need fill in min and max')
+            }
         });
     });
 
     function updateCW() {
 
-$.ajax(location.href, {
-    type: "post",
-    url: "http://localhost:8080/necklace",
-    data: {method: "updateCost"},
-    cache: false,
+        $.ajax(location.href, {
+            type: "post",
+            url: "http://localhost:8080/necklace",
+            data: {method: "updateCost"},
+            cache: false,
 
-        success: function (result) {
+            success: function (result) {
 
 
-            $("#cost").replaceWith( "<label id = \"cost\">Цена ожерелья:" + result+" </label>");
-        },
-        error: function () {
-            alert("Mistake in cost");
-        }
-    });
+                $("#cost").replaceWith("<label id = \"cost\">Цена ожерелья:" + result + " </label>");
+            },
+            error: function () {
+                alert("Mistake in cost");
+            }
+        });
 
 
         $.ajax(location.href, {
@@ -54,7 +54,7 @@ $.ajax(location.href, {
             success: function (result) {
 
 
-                $("#weight").replaceWith( "<label id = \"weight\">Вес ожерелья:" + result+" </label>");
+                $("#weight").replaceWith("<label id = \"weight\">Вес ожерелья:" + result + " </label>");
             },
             error: function () {
                 alert("Mistake in weight");
@@ -63,6 +63,7 @@ $.ajax(location.href, {
 
 
     }
+
     function deleteStone() {
         var self = $(this);
         var necklaceId = $('#necklace-id').text();
@@ -75,13 +76,18 @@ $.ajax(location.href, {
             cache: false,
             success: function () {
 //RefreshTable(table0, 'http://localhost:8080/necklace');
-/*                var table = $('#necklace').DataTable();
-                table.row(self.closest("tr") )
-                    .remove()
-                    .draw(false);*/
+                var table = $('#necklace').DataTable();
+/*                 table.row(self.closest("td") )
+                 .remove()
+                 .draw(false);*/
+                (self.closest('td')).parent().remove();
+
+                //$(this).closest('td').remove()
+                //table.fnDraw();
+                //$('#necklace').DataTable();
 //alert("Перезагрузите сраницу для обновления таблицы")
                 //$("#necklace").DataTable().ajax.reload();
-            updateCW();
+                updateCW();
             },
             error: function () {
                 alert("\t\tError\nCon't delete stone from necklace");
@@ -89,7 +95,7 @@ $.ajax(location.href, {
         });
     };
 
-    $(".necklace-add").click(function(){
+    $(".necklace-add").click(function () {
         var self = $(this);
         //var id = self.parent('td').parent('tr').find('td:first').text();
         var necklaceId = $('#necklace-id').text();
@@ -103,10 +109,10 @@ $.ajax(location.href, {
         var weight = $('td:nth-child(5)', raw).text();
         //var btn = "<button class='necklace-delete' data-stone-id=\'" + ${stone.id} + "\'>Delete from necklace</button>";
         //var btn = "<button class='necklace-delete' data-stone-id='${stone.id}'>Delete from necklace</button>";
-        var btn = "<button class='necklace-delete' data-stone-id="+stoneId+">Delete from necklace</button>";
-/*        var btn =" <button class='necklace-delete' data-stone-id= ";
-        btn+=$(stone.id);
-        btn += ">Delete from necklace</button>";*/
+        var btn = "<button class='necklace-delete' data-stone-id=" + stoneId + ">Delete from necklace</button>";
+        /*        var btn =" <button class='necklace-delete' data-stone-id= ";
+         btn+=$(stone.id);
+         btn += ">Delete from necklace</button>";*/
         $.ajax(location.href, {
             type: "post",
             url: "http://localhost:8080/necklace",
@@ -116,7 +122,7 @@ $.ajax(location.href, {
 
                 var table = $('#necklace').DataTable();
                 //var btn = "<button class='necklace-delete' data-stone-id='" + ${stone.id} +"'>Delete from necklace</button>";
-                table.row.add( [type, name , cost, weight, btn]).draw(false);
+                table.row.add([type, name, cost, weight, btn]).draw(false);
                 $(".necklace-delete").click(deleteStone);
                 updateCW();
             },
@@ -129,6 +135,8 @@ $.ajax(location.href, {
 
 
     $(".necklace-delete").click(deleteStone);
+
+
 
 });
 

@@ -90,7 +90,7 @@
 <bh />
 <div>
     <div>
-      <%--  <label id = "cost">Цена ожерелья: </label> ${necklace.getCost()}--%>
+
           <label id = "cost">Цена ожерелья: ${necklace.getCost()} </label>
     </div>
     <div>
