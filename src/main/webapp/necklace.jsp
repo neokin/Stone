@@ -8,15 +8,25 @@
         #stones, #necklace {
             padding: 5px;
             text-align: center;
-
         }
 
         .hide {
             display: none
         }
+
+
     </style>
 </head>
 <body>
+<%--<tbody><tr>
+    <td>Minimum cost:</td>
+    <td><input id="min" name="min" type="text"></td>
+</tr>
+<tr>
+    <td>Maximum cost:</td>
+    <td><input id="max" name="max" type="text"></td>
+</tr>
+</tbody>--%>
 <table id="stones" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
@@ -25,7 +35,7 @@
         <th>Name</th>
         <th>Weight</th>
         <th>Cost</th>
-        <th>Add</th>
+        <th onclick="false">Add</th>
     </tr>
     </thead>
 
@@ -62,7 +72,7 @@
 </fieldset>
 
 
-<div style="text-align: center;"><b>Отобранные камни для ожерелья </b>${necklace.name}</div>
+<div style="text-align: center;"><b>Отобранные камни для ожерелья </b></div>
 <div class="hide" id="necklace-id">${necklace.id}</div>
 <table id="necklace" class="display" cellspacing="0" width="100%">
     <thead>

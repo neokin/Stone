@@ -97,7 +97,7 @@ $(document).ready(function () {
 
     $(".necklace-add").click(function () {
         var self = $(this);
-        
+
         var necklaceId = $('#necklace-id').text();
         var stoneId = self.attr('data-stone-id');
 
