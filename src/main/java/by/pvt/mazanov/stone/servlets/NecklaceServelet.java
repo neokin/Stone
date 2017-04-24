@@ -48,7 +48,7 @@ public class NecklaceServelet extends HttpServlet {
                 request.setAttribute("necklace", necklace);
 
                 request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-                JDBCUtils.getConnectionPool().expire(conn);
+
                 break;
             }
             case "add": {
@@ -58,7 +58,7 @@ public class NecklaceServelet extends HttpServlet {
                 if(!result){
                     response.sendError(500);
                 }
-                JDBCUtils.getConnectionPool().expire(conn);
+
                 break;
             }
             case "delete": {
@@ -68,7 +68,7 @@ public class NecklaceServelet extends HttpServlet {
                 if(!result){
                     response.sendError(500);
                 }
-                JDBCUtils.getConnectionPool().expire(conn);
+
                 break;
             }
             case "updateCost": {
@@ -78,8 +78,7 @@ public class NecklaceServelet extends HttpServlet {
                 double cost = necklace.getCost();
                 response.getWriter().write(String.valueOf(cost));
                 response.getWriter().close();
-                request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-                JDBCUtils.getConnectionPool().expire(conn);
+
                 break;
             }
 
@@ -90,13 +89,11 @@ public class NecklaceServelet extends HttpServlet {
                 double weight = necklace.getWeight();
                 response.getWriter().write(String.valueOf(weight));
                 response.getWriter().close();
-                request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-                JDBCUtils.getConnectionPool().expire(conn);
+
                 break;
             }
         }
-
-        JDBCUtils.getConnectionPool().expire(conn);
+        JDBCUtils.getConnectionPool().checkIn(conn);
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)

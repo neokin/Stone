@@ -33,7 +33,6 @@ $(document).ready(function () {
 
         $.ajax(location.href, {
             type: "post",
-            url: "http://localhost:8080/necklace",
             data: {method: "updateCost"},
             cache: false,
 
@@ -55,7 +54,6 @@ $(document).ready(function () {
 
         $.ajax(location.href, {
             type: "post",
-            url: "http://localhost:8080/necklace",
             data: {method: "updateWeight"},
             cache: false,
 
@@ -80,7 +78,6 @@ $(document).ready(function () {
 
         $.ajax(location.href, {
             type: "post",
-            url: "http://localhost:8080/necklace",
             data: {method: "delete", necklace: necklaceId, stone: stoneId},
             cache: false,
             success: function () {

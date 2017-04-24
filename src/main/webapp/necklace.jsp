@@ -18,15 +18,6 @@
     </style>
 </head>
 <body>
-<%--<tbody><tr>
-    <td>Minimum cost:</td>
-    <td><input id="min" name="min" type="text"></td>
-</tr>
-<tr>
-    <td>Maximum cost:</td>
-    <td><input id="max" name="max" type="text"></td>
-</tr>
-</tbody>--%>
 <table id="stones" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
@@ -107,7 +98,6 @@
         <label id = "weight">Вес ожерелья: ${necklace.getWeight()} </label>
     </div>
 </div>
-<%--<script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>--%>
 
 
 <script src="<c:url value="/resources/js/lib/jquery-1.12.4.js"/>"></script>
