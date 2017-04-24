@@ -107,7 +107,7 @@
         <label id = "weight">Вес ожерелья: ${necklace.getWeight()} </label>
     </div>
 </div>
-<script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
+<%--<script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>--%>
 
 
 <script src="<c:url value="/resources/js/lib/jquery-1.12.4.js"/>"></script>
