@@ -57,9 +57,11 @@ public class JDBCUtils {
 
     public static Collection<Stone> getStones(Connection conn) {
         List<Stone> list = new ArrayList<>();
+        String sql0 = "create database if not exist stones; and create database if not exist necklace; and create database if not exist necklace_stones";
         String sql = "select * from stones";
         PreparedStatement pstm = null;
         try {
+            conn.prepareStatement(sql0);
             pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
 

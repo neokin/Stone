@@ -37,13 +37,14 @@ $(document).ready(function () {
             cache: false,
 
             success: function (result) {
+                $("#cost").replaceWith("<label id = \"cost\">Цена ожерелья:" + result + " </label>");
                 if (result == 0) {
 
                     table.clear().draw();
 
                 }
 
-                $("#cost").replaceWith("<label id = \"cost\">Цена ожерелья:" + result + " </label>");
+
 
             },
             error: function () {
@@ -110,7 +111,6 @@ $(document).ready(function () {
 
         $.ajax(location.href, {
             type: "post",
-            url: "http://localhost:8080/necklace",
             data: {method: "add", necklace: necklaceId, stone: stoneId},
             cache: false,
             success: function () {

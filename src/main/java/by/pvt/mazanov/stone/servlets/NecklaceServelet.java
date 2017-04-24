@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Connection;
-import java.util.List;
+
 
 
 @WebServlet(urlPatterns = "/necklace", loadOnStartup = 1)
@@ -24,12 +24,18 @@ public class NecklaceServelet extends HttpServlet {
 
         Connection conn = JDBCUtils.getConnectionPool().checkOut();
 
-        request.setAttribute("stones", JDBCUtils.getStones(conn));
+
+        try {
+            request.setAttribute("stones", JDBCUtils.getStones(conn));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         Necklace necklace = JDBCUtils.getNecklace(conn);
         necklace.setStonesList(JDBCUtils.getNecklaceStones(conn, necklace.getId()));
         request.setAttribute("necklace", necklace);
         request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-        JDBCUtils.getConnectionPool().expire(conn);
+        JDBCUtils.getConnectionPool().checkIn(conn);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -105,6 +111,6 @@ public class NecklaceServelet extends HttpServlet {
         JDBCUtils.deleteNecklaceStone(conn, Integer.parseInt(necklace), Integer.parseInt(stone));
         request.setAttribute("necklace", JDBCUtils.getNecklaceStones(conn, Integer.parseInt(necklace)));
         request.getRequestDispatcher("/necklace.jsp").forward(request, response);
-        JDBCUtils.getConnectionPool().expire(conn);
+        JDBCUtils.getConnectionPool().checkIn(conn);
     }
 }
